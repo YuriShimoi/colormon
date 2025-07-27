@@ -88,6 +88,7 @@ main {
 
 #palette {
   width: 220px;
+  max-width: 45vw;
   height: 30px;
   margin-top: 8px;
   border: 1px solid #00000022;
@@ -98,6 +99,7 @@ main {
 
 #result-container {
   width: 150px;
+  max-width: 40vw;
   display: flex;
   gap: 8px;
   flex-direction: column;

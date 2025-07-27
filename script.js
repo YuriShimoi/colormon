@@ -109,6 +109,8 @@ async function load() {
   response = rnd_pokemon.name;
   renderPalette(rnd_pokemon.sprite.default);
   fillTypes(rnd_pokemon.typeBadges);
+
+  $newbtn.disabled = false;
 }
 
 function fillDatalist() {
