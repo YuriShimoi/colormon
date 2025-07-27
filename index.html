@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colormon</title>
+
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main>
+      <div id="content">
+        <div id="guess-container">
+          <input id="guess-input" list="pokemonlist" placeholder="Pokemon...">
+          <datalist id="pokemonlist"></datalist>
+          <button onclick="guess()">GUESS</button>
+        </div>
+        <div id="info-container">
+          <div id="preview">
+            <img id="preview-cover" src="questionmark.png">
+            <canvas id="canvas-preview"></canvas>
+          </div>
+          <span id="pokemon-name"></span>
+          <div id="type-list"></div>
+          <div id="palette"></div>
+        </div>
+        <div id="result-container">
+          <span class="guess"></span>
+          <span class="guess"></span>
+          <span class="guess"></span>
+          <span class="guess"></span>
+          <span class="guess"></span>
+        </div>
+        <button id="new-btn" onclick="load()">NEW POKEMON</button>
+      </div>
+    </main>
+    
+    <script src="pokemon-names.js"></script>
+    <script src="api-helper.js"></script>
+    <script defer src="script.js"></script>
+  </body>
+</html>
