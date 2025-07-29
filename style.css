@@ -11,7 +11,146 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
+
+button {
+  cursor: pointer;
+  background: #328de2;
+  padding: 5px 10px;
+  color: white;
+  border: 1px solid #00000022;
+  font-weight: bold;
+  transition: background ease 120ms;
+}
+button:hover {
+  background: #0c6ac2;
+}
+
+img {
+  pointer-events: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* #region [ CONFIG ] */
+
+#config {
+  position: fixed;
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+  align-items: center;
+  justify-content: center;
+
+  backdrop-filter: blur(1px);
+  z-index: 2;
+  background: #ffffff33;
+
+  opacity: 1;
+  pointer-events: all;
+  transition: opacity ease 200ms;
+}
+#config[disabled] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#config-container {
+  width: 300px;
+  max-width: 90vw;
+  padding: 10px;
+
+  background: white;
+  border: 1px solid #00000018;
+  box-shadow: 3px 3px 0px #DADAE7;
+  border-radius: 3px;
+}
+
+#config-container br + h5 {
+  margin-top: 10px;
+}
+#config-container h5 {
+  display: inline-block;
+  margin: 0 0 12px 0;
+  font-size: 1.1rem;
+}
+
+#config-container button.close-btn {
+  display: flex;
+  float: right;
+  line-height: 0;
+  align-items: center;
+
+  background: white;
+  color: #222222;
+  font-size: 24px;
+
+  padding: 5px;
+  aspect-ratio: 1;
+  border-radius: 3px;
+}
+#config-container button.close-btn:hover {
+  background: #eeeeee;
+}
+
+#config-container label {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#config-container span.config-demo {
+  width: 120px;
+  float: right;
+  height: 18px;
+  overflow: hidden;
+  margin-top: 3px;
+  text-align: center;
+}
+
+#color-percentage-input ~ span.config-demo:first-of-type {
+  background: linear-gradient(to right, #ca1818 6%, #dddddd 6%, #dddddd 25%, #21c721 25%, #21c721 78%, #0f5496 78%, #0f5496 85%, #1686f0 85%);
+
+  transition: background ease 80ms;
+}
+#color-percentage-input:not(:checked) ~ span.config-demo:first-of-type {
+  background: linear-gradient(to right, #ca1818 20%, #dddddd 20%, #dddddd 40%, #21c721 40%, #21c721 60%, #0f5496 60%, #0f5496 80%, #1686f0 80%);
+}
+
+#pokemon-type-input ~ span.config-demo img {
+  height: 18px;
+}
+#pokemon-type-input:not(:checked) ~ span.config-demo img {
+  filter: brightness(10) brightness(0.9);
+}
+
+#generation-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+#generation-list .config-toggle {
+  display: inline-block;
+  color: #777777;
+  background: #e4e4e4;
+
+  border-radius: 2px;
+  padding: 0px 6px 2px 5px;
+  cursor: pointer;
+  
+  transition: all ease 180ms;
+}
+#generation-list .config-toggle[enabled] {
+  color: white;
+  background: #2dea2d;
+}
+
+/* #endregion */
 
 #content {
   display: grid;
@@ -24,8 +163,10 @@ main {
   border-radius: 3px;
   background: white;
   border: 1px solid #00000018;
-  box-shadow: 3px 3px 0px #00000018;
+  box-shadow: 3px 3px 0px #DADAE7;
 }
+
+/* #region [ GUESS ] */
 
 #guess-container {
   grid-column: 1 / 3;
@@ -48,9 +189,20 @@ main {
   outline: none;
 }
 
-#guess-container > button {
-  cursor: pointer;
+#config-btn {
+  font-size: 25px;
+  padding: 0 2px;
+  line-height: 10px;
+  background: #aaaaaa;
+  margin-left: 5px;
 }
+#config-btn:hover {
+  background: #444444;
+}
+
+/* #endregion */
+
+/* #region [ INFO ] */
 
 #info-container {
   display: flex;
@@ -81,6 +233,9 @@ main {
   gap: 5px;
   height: 24px;
 }
+#type-list[visible='false'] img {
+  filter: brightness(10) brightness(0.9);
+}
 
 #type-list img {
   width: 72px;
@@ -88,7 +243,7 @@ main {
 
 #palette {
   width: 220px;
-  max-width: 45vw;
+  max-width: 42vw;
   height: 30px;
   margin-top: 8px;
   border: 1px solid #00000022;
@@ -97,9 +252,13 @@ main {
   border-radius: 1px;
 }
 
+/* #endregion */
+
+/* #region [ RESULT ] */
+
 #result-container {
   width: 150px;
-  max-width: 40vw;
+  max-width: 38vw;
   display: flex;
   gap: 8px;
   flex-direction: column;
@@ -112,7 +271,11 @@ main {
   line-height: 30px;
   background: #00000011;
   border-radius: 3px;
-  padding-left: 10px;
+  padding: 0 4px;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 #result-container .guess.wrong {
   background: #ffcccc;
@@ -121,14 +284,24 @@ main {
   background: #ccffcc;
 }
 
+/* #endregion */
+
+/* #region [ NEW BTN ] */
+
 #new-btn {
   grid-column: 1 / 3;
-  background-color: #328de2;
-  color: white;
-  cursor: pointer;
+  background-color: #aaaaaa;
+}
+#new-btn:hover {
+  background-color: #dd432e;
 }
 
 #new-btn:disabled {
   pointer-events: none;
   opacity: 0.4;
 }
+#new-btn:disabled:hover {
+  background-color: #aaaaaa;
+}
+
+/* #endregion */

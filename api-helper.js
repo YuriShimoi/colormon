@@ -84,7 +84,9 @@ class PokemonClass {
 }
 
 class PokemonAPI {
-  static TYPEBASEURL = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vii/lets-go-pikachu-lets-go-eevee/';
+  // https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vii/lets-go-pikachu-lets-go-eevee/
+  static TYPEBASEURL = 'typebadges/';
+  static MISSINGNOB64 = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAPUExURRgQEP///4BwmPCwiAAAAOCvPXUAAAAFdFJOU/////8A+7YOUwAAAAlwSFlzAAAOwwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAUGFpbnQuTkVUIDUuMS44G2nqqAAAALZlWElmSUkqAAgAAAAFABoBBQABAAAASgAAABsBBQABAAAAUgAAACgBAwABAAAAAgAAADEBAgAQAAAAWgAAAGmHBAABAAAAagAAAAAAAABgAAAAAQAAAGAAAAABAAAAUGFpbnQuTkVUIDUuMS44AAMAAJAHAAQAAAAwMjMwAaADAAEAAAABAAAABaAEAAEAAACUAAAAAAAAAAIAAQACAAQAAABSOTgAAgAHAAQAAAAwMTAwAAAAAKuAIRNTnjgoAAACTUlEQVRoQ+2WSbIjIQxEa/D9z9w51Vag+LBqsiaMwnoaKOzrt1kHMNQBDHUAQx3AUAcw1H8GuO77fp4bx6NBpku1APAPv3RuRKZL9QHyrdEegGMXZwMAThW+APf6HrxJwf43ZHC9PlgkYjJdqgV4XovRbwG4RGoB/a8HXK9rRAafmS7VK5GWUIQ0Ml2ql0HWj25bmhzX70VtKNEXOhPhmelSPYBCf1/41iDTpXol8muA4rAbG5qM0L8SsUYbXjSFj4s5YJTpUi2A3jCdTiPTpXoAVoi+de0okUqjrUKcTJdqAejVF+44M12ql0Gq47fhmvpuMwNGTohTyXSpOQCiphi9nOu+sskMnUGzydCXRKylWgAVHkuJ5eERa6kO4HZrX7wOewBY/6iNhvK/sAdqMWXCpgzgkjVCkcghKdZScwCtHf+b0KHnyhI5/hsZSEoA+cRaag7AXQ61eR6vUGewfhVhDwIFXfhaHWupOYDi5amb44diLTUJiGs9vuezsAdxif/Vjp/CxhFrqTmAmowDcheoa+UyZdFZI64i/7PGmlpYogDgXgn448oS2b/6yys1Wr4X3dxO8XDLwYm1VAsgeR3piLVUF6DQ5R6KtdRkDz7ZMUfsdKylWhkQQAaWkn4UYi3VBTh6vnMYxlpqGkDHRnjMj7GWmu6BG+tnNoup704D5FkQJuAkYi3V6IG86gpjz+8BUVpF6HSspRo9kG/mkeHKEjn0EATQLdZS0z0Q4cskqFhLzQH+oAMY6gCGOoChDmCoAxjqAIY6gIF+v39Nz4UK8uys8wAAAABJRU5ErkJggg==';
 
   static async getPokemon(uid) {
     return await fetch(`https://pokeapi.co/api/v2/pokemon/${uid}`, {
@@ -104,9 +106,21 @@ class PokemonAPI {
     });
   }
 
+  static getMissingNo() {
+    return new PokemonClass({
+      name: 'missingNo',
+      sprites: {
+        versions: { 'generation-v': { 'black-white': { front_default: PokemonAPI.MISSINGNOB64 } } },
+        other: {}
+      },
+      types: [],
+      stats: []
+    });
+  }
+
   static async getPokemonCount() {
-    return 1302;
-    // the code below works, but for optimizations with the pokemon name list it is abandoned
+    return 1025;
+    // the code below works, removed to reduce API requests
 
     // return await fetch('https://pokeapi.co/api/v2/pokemon/', {
     //   method: 'GET'

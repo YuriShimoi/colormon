@@ -9,15 +9,33 @@
   </head>
   <body>
     <main>
+      <div id="config" disabled>
+        <div id="config-container">
+          <button class="close-btn" onclick="closeConfig()">×</button>
+          <h5>Configs</h5>
+          <br>
+          <input type="checkbox" id="color-percentage-input" checked>
+          <label for="color-percentage-input">Color Percentage</label>
+          <span class="config-demo"></span>
+          <br>
+          <input type="checkbox" id="pokemon-type-input" checked>
+          <label for="pokemon-type-input">Pokemon Type</label>
+          <span class="config-demo"><img src="typebadges/1.png"> <img src="typebadges/10.png"></span>
+          <br>
+          <h5>Generations</h5>
+          <div id="generation-list"></div>
+        </div>
+      </div>
       <div id="content">
         <div id="guess-container">
           <input id="guess-input" list="pokemonlist" placeholder="Pokemon...">
           <datalist id="pokemonlist"></datalist>
-          <button onclick="guess()">GUESS</button>
+          <button id="guess-btn" onclick="guess()">GUESS</button>
+          <button id="config-btn" onclick="openConfig()">⚙</button>
         </div>
         <div id="info-container">
           <div id="preview">
-            <img id="preview-cover" src="questionmark.png">
+            <img id="preview-cover" src="img/questionmark.png">
             <canvas id="canvas-preview"></canvas>
           </div>
           <span id="pokemon-name"></span>
