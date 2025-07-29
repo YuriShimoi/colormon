@@ -1,8 +1,14 @@
+:root {
+  --background: #81818f; /* #f1f1ff; */
+  --shadow: #00000033;
+  --button-border: #00000000;
+}
+
 html, body {
   padding: 0;
   margin: 0;
   height: 100%;
-  background: #f1f1ff;
+  background: var(--background);
   font-family: system-ui, monospace;
 }
 
@@ -19,9 +25,9 @@ button {
   background: #328de2;
   padding: 5px 10px;
   color: white;
-  border: 1px solid #00000022;
+  border: 1px solid var(--button-border);
   font-weight: bold;
-  transition: background ease 120ms;
+  transition: background ease 180ms;
 }
 button:hover {
   background: #0c6ac2;
@@ -47,7 +53,7 @@ img {
 
   backdrop-filter: blur(1px);
   z-index: 2;
-  background: #ffffff33;
+  background: var(--shadow);
 
   opacity: 1;
   pointer-events: all;
@@ -61,11 +67,11 @@ img {
 #config-container {
   width: 300px;
   max-width: 90vw;
-  padding: 10px;
+  padding: 15px;
 
   background: white;
-  border: 1px solid #00000018;
-  box-shadow: 3px 3px 0px #DADAE7;
+  border: 1px solid var(--shadow);
+  box-shadow: 3px 3px 0px var(--shadow);
   border-radius: 3px;
 }
 
@@ -84,13 +90,15 @@ img {
   line-height: 0;
   align-items: center;
 
+  border-color: var(--shadow);
   background: white;
   color: #222222;
   font-size: 24px;
 
-  padding: 5px;
+  padding: 6px 5px 4px 5px;
   aspect-ratio: 1;
   border-radius: 3px;
+  margin: -5px -5px 0 0;
 }
 #config-container button.close-btn:hover {
   background: #eeeeee;
@@ -138,16 +146,20 @@ img {
   display: inline-block;
   color: #777777;
   background: #e4e4e4;
-
+  border: 1px solid transparent;
+  
   border-radius: 2px;
   padding: 0px 6px 2px 5px;
   cursor: pointer;
   
-  transition: all ease 180ms;
+  transition: all ease 180ms, border-color linear 0ms;
 }
 #generation-list .config-toggle[enabled] {
   color: white;
   background: #2dea2d;
+}
+#generation-list .config-toggle:hover {
+  border-color: var(--shadow);
 }
 
 /* #endregion */
@@ -162,8 +174,8 @@ img {
   padding: 10px;
   border-radius: 3px;
   background: white;
-  border: 1px solid #00000018;
-  box-shadow: 3px 3px 0px #DADAE7;
+  border: 1px solid var(--shadow);
+  box-shadow: 3px 3px 0px var(--shadow);
 }
 
 /* #region [ GUESS ] */
@@ -179,7 +191,6 @@ img {
 }
 
 #guess-container > * {
-  border: 1px solid #00000022;
   border-radius: 2px;
 }
 
@@ -187,6 +198,7 @@ img {
   width: 100%;
   height: 24px;
   outline: none;
+  border: 1px solid #cccccc;
 }
 
 #config-btn {
@@ -246,10 +258,9 @@ img {
   max-width: 42vw;
   height: 30px;
   margin-top: 8px;
-  border: 1px solid #00000022;
+  border: 1px solid var(--shadow);
   border-left: none;
   border-right: none;
-  border-radius: 1px;
 }
 
 /* #endregion */
@@ -276,12 +287,15 @@ img {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  text-transform: capitalize;
 }
 #result-container .guess.wrong {
   background: #ffcccc;
+  animation: lockin forwards 200ms;
 }
 #result-container .guess.right {
   background: #ccffcc;
+  animation: lockin forwards 200ms;
 }
 
 /* #endregion */
@@ -305,3 +319,18 @@ img {
 }
 
 /* #endregion */
+
+@keyframes lockin {
+  0% {
+    transform: translateY(0px) scale(0.9);
+  }
+  20% {
+    transform: translateY(-5px) scale(1.05);
+  }
+  80% {
+    transform: translateY(2px) scale(1);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}

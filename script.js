@@ -22,12 +22,12 @@ let guesses = 0;
 const genRanges = [151, 100, 135, 107, 156, 72, 88, 96, 120];
 
 function guess() {
-  if(!$guessinput.value) return;
+  if(!$guessinput.value || !POKEMONNAMES.includes($guessinput.value.toLowerCase())) return;
   const guesselement = document.getElementsByClassName('guess')[guesses++];
-  guesselement.classList.add($guessinput.value == response.name? 'right': 'wrong');
-  guesselement.innerHTML = $guessinput.value;
+  guesselement.classList.add($guessinput.value.toLowerCase() == response.name.toLowerCase()? 'right': 'wrong');
+  guesselement.innerHTML = $guessinput.value.toLowerCase();
 
-  if($guessinput.value == response.name || guesses >= 5) stopGame();
+  if($guessinput.value.toLowerCase() == response.name.toLowerCase() || guesses >= 5) stopGame();
 }
 
 function stopGame() {
